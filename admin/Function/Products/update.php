@@ -42,6 +42,7 @@
             price = '$price',
             sale = '$sale',
             cat_id = '$category',
+            trending = '$trending',
             description = '$description'
             WHERE id = '$id'";
   $query = $conn -> query($update);

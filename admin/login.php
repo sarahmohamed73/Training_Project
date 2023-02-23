@@ -46,7 +46,12 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" method="POST" action="Function/LoginCkeck.php?pageName=<?=$_GET['pageName']?>">
+                                    <form class="user" method="POST" action="Function/LoginCheck.php<?php
+                                        if(isset($_GET['pageName'])) {
+                                            $pageName = $_GET['pageName'];
+                                            echo "?pageName=$pageName";
+                                        }
+                                    ?>">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>

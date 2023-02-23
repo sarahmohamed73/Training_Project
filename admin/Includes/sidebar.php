@@ -30,10 +30,16 @@
 <!-- Nav Item - Products -->
 <li class="nav-item active">
     <a class="nav-link" href="products.php">
-        <i class="fa fa-user"></i>
+        <i class="fas fa-store-alt"></i>
         <span>Products</span></a>
 </li>
 
+<!-- Nav Item - Categories -->
+<li class="nav-item active">
+    <a class="nav-link" href="categories.php">
+        <i class="fas fa-shapes"></i>
+        <span>Categories</span></a>
+</li>
 <!-- Divider -->
 <hr class="sidebar-divider">
 

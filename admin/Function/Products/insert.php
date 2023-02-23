@@ -53,9 +53,9 @@
   include "../connection.php";
   $insert = "INSERT INTO products 
   -- Insert image name into the database  -- new name
-  (name, price, sale, image, cat_id, description) 
+  (name, price, sale, image, cat_id, trending, description) 
   VALUES 
-  ('$name', '$price', '$sale', '$images', '$category', '$description')";
+  ('$name', '$price', '$sale', '$images', '$category', '$trending', '$description')";
 
   $query = $conn -> query($insert);
   if($query) {

@@ -39,8 +39,6 @@ include "Includes/sidebar.php";
                   include "Design/Products/add.php";
                 } elseif($_GET['action'] == 'edit') {
                   include "Design/Products/edit.php";
-                } elseif($_GET['action'] == 'addCat') {
-                  include "Design/Categories/add.php";
                 }
               ?>
               </div>

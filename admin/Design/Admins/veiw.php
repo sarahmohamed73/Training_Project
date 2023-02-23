@@ -7,7 +7,7 @@
 ?>
 <a class="btn btn-primary" href="?action=add">Add User</a>
 <br><br>
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <thead>
     <tr class="text-primary">
     <th>ID</th>
@@ -28,7 +28,7 @@
       foreach($admins as $admin) {
     ?>
     <tr>
-      <td class="text-primary"><?= $admin['id'] ?></td>
+      <td><?= $admin['id'] ?></td>
       <td><?= $admin['username'] ?></td>
       <td><?= $admin['email'] ?></td>
       <td><?= $admin['phone'] ?></td>

@@ -6,33 +6,33 @@
   }
 ?>
 <a class="btn btn-primary" href="?action=add">Add Product</a>
-<a class="btn btn-primary" href="?action=addCat">Add Category</a>
 <br><br>
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <thead>
-    <tr>
+    <tr class="text-primary">
       <th>ID</th>
       <th>Name</th>
       <th>Price</th>
       <th>Sale</th>
       <th>Images</th>
       <th>Categories</th>
+      <th>Trending</th>
       <th>Controls</th>
     </tr>
   </thead>
   <tbody>
   <?php
       include "Function/connection.php";
-      $select = "SELECT * From products pro LEFT JOIN (SELECT name AS cat_name , id AS cat_id FROM categories) AS cat ON pro.cat_id = cat.cat_id ;";
+      $select = "SELECT * From products pro LEFT JOIN (SELECT name AS cat_name , id AS cat_id FROM categories_from_category) AS cat ON pro.cat_id = cat.cat_id ;";
       $products = $conn -> query($select);
       foreach($products as $product) {
     ?>
       <tr>
       <td><?= $product['id'] ?></td>
-      <td><?= $product['name'] ?></td>
+      <td style="width:300px"><?= $product['name'] ?></td>
       <td><?= $product['price']."$" ?></td>
       <td><?= $product['sale'] ?></td>
-      <td>
+      <td style="width:150px">
         <?php
           $images = explode(",",$product['image']);
           foreach($images as $image) {
@@ -41,6 +41,7 @@
         <?php } ?>
       </td>
       <td><?= $product['cat_name'] ?></td>
+      <td><?= $product['trending'] == 0 ? "NOT TRENDING" : "TRENDING" ?></td>
       <td>
         <a class="btn btn-primary" href="?action=edit&id=<?=$product["id"]?>">Edit</a>
         <!-- Button trigger modal -->
