@@ -1,69 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Boutique | Ecommerce bootstrap template</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Lightbox-->
-    <link rel="stylesheet" href="vendor/lightbox2/css/lightbox.min.css">
-    <!-- Range slider-->
-    <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
-    <!-- Bootstrap select-->
-    <link rel="stylesheet" href="vendor/bootstrap-select/css/bootstrap-select.min.css">
-    <!-- Owl Carousel-->
-    <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.theme.default.css">
-    <!-- Google fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.png">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-  </head>
+<?php
+  session_start();
+  if(isset($_SESSION['discount'])) {
+    $discount = $_SESSION['discount'];
+  } else {
+    $discount = 0;
+  }
+  include "Includes/header.php";
+?>
   <body>
     <div class="page-holder">
-      <!-- navbar-->
-      <header class="header bg-white">
-        <div class="container px-0 px-lg-3">
-          <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="index.php"><span class="font-weight-bold text-uppercase text-dark">Boutique</span></a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <!-- Link--><a class="nav-link" href="index.php">Home</a>
-                </li>
-                <li class="nav-item">
-                  <!-- Link--><a class="nav-link" href="shop.php">Shop</a>
-                </li>
-                <li class="nav-item">
-                  <!-- Link--><a class="nav-link" href="detail.php">Product detail</a>
-                </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                  <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown"><a class="dropdown-item border-0 transition-link" href="index.php">Homepage</a><a class="dropdown-item border-0 transition-link" href="shop.php">Category</a><a class="dropdown-item border-0 transition-link" href="detail.php">Product detail</a><a class="dropdown-item border-0 transition-link" href="cart.php">Shopping cart</a><a class="dropdown-item border-0 transition-link" href="checkout.php">Checkout</a></div>
-                </li>
-              </ul>
-              <ul class="navbar-nav ml-auto">               
-                <li class="nav-item"><a class="nav-link" href="cart.php"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">(2)</small></a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </header>
+      <?php
+        include "Includes/navbar.php";
+      ?>
       <!--  Modal -->
-      <div class="modal fade" id="productView" tabindex="-1" role="dialog" aria-hidden="true">
+      <!-- <div class="modal fade" id="productView" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body p-0">
@@ -100,7 +50,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="container">
         <!-- HERO SECTION-->
         <section class="py-5 bg-light">
@@ -139,12 +89,12 @@
                   <tbody>
                     <?php
                       include_once "admin/Function/connection.php";
-                      $select = "SELECT * FROM carts ORDER BY 'date added'";
+                      $select = "SELECT * FROM carts ORDER BY cart_id DESC";
                       $products = $conn -> query($select);
-                      $totatPrice = 0;
+                      $subtotal = 0;
                       foreach($products as $product) {
                         $images = explode(",",$product['image']);
-                        $totatPrice += $product['quantity'] * $product['price']
+                        $subtotal += $product['quantity'] * $product['price'];
                     ?>
                     <tr>
                       <th class="pl-0 border-0" scope="row">
@@ -158,18 +108,21 @@
                       <td class="align-middle border-0">
                         <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                           <div class="quantity">
-                            <a class="dec-btn p-1 text-dark" href="Function/shoppingList/update.php?action=decrease&id=<?=$product['id']?>"><i class="fas fa-caret-left"></i></a>
-                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="<?=$product['quantity']?>"/>
-                            <a class="inc-btn p-1 text-dark" href="Function/shoppingList/update.php?action=increase&id=<?=$product['id']?>"><i class="fas fa-caret-right"></i></a>
+                            <button class="decrease<?=$product['id']?> dec-btn p-0 text-dark" onclick="decrease(<?=$product['id']?>,<?=$product['price']?>)"><i class="fas fa-caret-left"></i></button>
+                            <input class="product product<?=$product['id']?> form-control form-control-sm border-0 shadow-0 p-0" type="text" value="<?=$product['quantity']?>"/>
+                            <button class="inc-btn p-0 text-dark" onclick="increase(<?=$product['id']?>,<?=$product['price']?>)"><i class="fas fa-caret-right"></i></button>
                           </div>
                         </div>
                       </td>
                       <td class="align-middle border-0">
-                        <p class="mb-0 small">$<?=$product['price']*$product['quantity']?></p>
+                        <p class="totalPrice<?=$product['id']?> mb-0 small">$<?=$product['price']*$product['quantity']?></p>
                       </td>
-                      <td class="align-middle border-0"><a class="reset-anchor" href="Function/shoppingList/update.php?id=<?=$product['id']?>"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                      <td class="align-middle border-0">
+                        <button class="reset-anchor btn" onclick="Delete(<?=$product['id']?>)">
+                        <i class="fas fa-trash-alt small text-muted"></i>
+                      </button></td>
                     </tr>
-                    <?php } ?>
+                    <?php } $totalPrice = $subtotal - ($subtotal*($discount/100)); ?>
                   </tbody>
                 </table>
               </div>
@@ -187,13 +140,13 @@
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Cart total</h5>
                   <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">$<?=$totatPrice?></span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="subtotal text-muted small">$<?=$subtotal?></span></li>
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>$<?=$totatPrice?></span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span class="finalTotal">$<?=$totalPrice?></span></li>
                     <li>
-                      <form action="#">
+                      <form action="Function/shoppingList/discount.php" method="POST">
                         <div class="form-group mb-0">
-                          <input class="form-control" type="text" placeholder="Enter your coupon">
+                          <input class="form-control" type="text" name="coupon" value="" placeholder="Enter your coupon">
                           <button class="btn btn-dark btn-sm btn-block" type="submit"> <i class="fas fa-gift mr-2"></i>Apply coupon</button>
                         </div>
                       </form>
@@ -205,85 +158,15 @@
           </div>
         </section>
       </div>
-      <footer class="bg-dark text-white">
-        <div class="container py-4">
-          <div class="row py-5">
-            <div class="col-md-4 mb-3 mb-md-0">
-              <h6 class="text-uppercase mb-3">Customer services</h6>
-              <ul class="list-unstyled mb-0">
-                <li><a class="footer-link" href="#">Help &amp; Contact Us</a></li>
-                <li><a class="footer-link" href="#">Returns &amp; Refunds</a></li>
-                <li><a class="footer-link" href="#">Online Stores</a></li>
-                <li><a class="footer-link" href="#">Terms &amp; Conditions</a></li>
-              </ul>
-            </div>
-            <div class="col-md-4 mb-3 mb-md-0">
-              <h6 class="text-uppercase mb-3">Company</h6>
-              <ul class="list-unstyled mb-0">
-                <li><a class="footer-link" href="#">What We Do</a></li>
-                <li><a class="footer-link" href="#">Available Services</a></li>
-                <li><a class="footer-link" href="#">Latest Posts</a></li>
-                <li><a class="footer-link" href="#">FAQs</a></li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <h6 class="text-uppercase mb-3">Social media</h6>
-              <ul class="list-unstyled mb-0">
-                <li><a class="footer-link" href="#">Twitter</a></li>
-                <li><a class="footer-link" href="#">Instagram</a></li>
-                <li><a class="footer-link" href="#">Tumblr</a></li>
-                <li><a class="footer-link" href="#">Pinterest</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="border-top pt-4" style="border-color: #1d1d1d !important">
-            <div class="row">
-              <div class="col-lg-6">
-                <p class="small text-muted mb-0">&copy; 2020 All rights reserved.</p>
-              </div>
-              <div class="col-lg-6 text-lg-right">
-                <p class="small text-muted mb-0">Template designed by <a class="text-white reset-anchor" href="https://bootstraptemple.com/p/bootstrap-ecommerce">Bootstrap Temple</a></p>
-              </div>
-            </div>
-          </div>
+      <!-- SPINNERS -->
+      <div class="loading loading-hidden">
+        <div class="spinner-border spinner-border-sm" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
-      </footer>
-      <!-- JavaScript files-->
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="vendor/lightbox2/js/lightbox.min.js"></script>
-      <script src="vendor/nouislider/nouislider.min.js"></script>
-      <script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-      <script src="vendor/owl.carousel2/owl.carousel.min.js"></script>
-      <script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
-      <script src="js/front.js"></script>
-      <script>
-        // ------------------------------------------------------- //
-        //   Inject SVG Sprite - 
-        //   see more here 
-        //   https://css-tricks.com/ajaxing-svg-sprite/
-        // ------------------------------------------------------ //
-        function injectSvgSprite(path) {
-        
-            var ajax = new XMLHttpRequest();
-            ajax.open("GET", path, true);
-            ajax.send();
-            ajax.onload = function(e) {
-            var div = document.createElement("div");
-            div.className = 'd-none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
-            }
-        }
-        // this is set to BootstrapTemple website as you cannot 
-        // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
-        // while using file:// protocol
-        // pls don't forget to change to your domain :)
-        injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
-        
-      </script>
-      <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    </div>
-  </body>
-</html>
+        <div class="spinner-grow spinner-grow-sm" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <?php
+        include "Includes/footer.php";
+      ?>

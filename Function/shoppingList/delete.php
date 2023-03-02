@@ -3,9 +3,7 @@
   include "../../admin/Function/connection.php";
   $delete = "DELETE FROM carts WHERE id = $id";
   $query = $conn -> query($delete);
-  if($query) {
-    header("location: ../../cart.php");
-  } else {
+  if(!$query) {
     echo $conn -> error;
   }
 ?>
