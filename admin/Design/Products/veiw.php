@@ -5,6 +5,26 @@
     exit();
   }
 ?>
+<!-- Delete Modal -->
+<div class="modal fade" id="del" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You Sure You Want To Delete Product : <span class="adminName"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" data-id="" class="confirmDeleteProduct btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
 <a class="btn btn-primary" href="?action=add">Add Product</a>
 <br><br>
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -45,30 +65,9 @@
       <td>
         <a class="btn btn-primary" href="?action=edit&id=<?=$product["id"]?>">Edit</a>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal<?= $product["id"] ?>">
+        <button type="button" class="deleteProduct btn btn-danger" data-toggle="modal" data-target="#del" data-id="<?=$product['id']?>" data-name="<?=$product['name']?>">
           Delete
         </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal<?= $product["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Are You Sure You Want To Delete Product : <?= $product["name"] ?>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-danger" href="Function/Products/delete.php?id=<?=$product["id"]?>">Confirm</a>
-              </div>
-            </div>
-          </div>
-        </div>
       </td>
     </tr>
     <?php } ?>

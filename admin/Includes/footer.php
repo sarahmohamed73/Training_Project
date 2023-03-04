@@ -57,6 +57,17 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
+    <!-- Admins -->
+    <script src="js/Admins/delete-ajax.js"></script>
+    <script src="js/Admins/insert-ajax.js"></script>
+
+    <!-- Products -->
+    <script src="js/Products/delete-ajax.js"></script>
+    <script src="js/Products/insert-ajax.js"></script>
+
+    <!-- Messages -->
+    <script src="js/Messages/show_ajax.js"></script>
+
 </body>
 
 </html>

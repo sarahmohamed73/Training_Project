@@ -1,11 +1,11 @@
 <?php 
-  if(!isset($_GET['id'])) {
+  if(!isset($_POST['id'])) {
     header("location: ../../ErrorPage.php");
     exit();
   }
   
   include "../connection.php";
-  $id = $_GET['id'];
+  $id = $_POST['id'];
   $delete = "DELETE FROM products WHERE id = $id";
   $query = $conn -> query($delete);
   if($query) {
@@ -13,3 +13,4 @@
   } else {
     echo $conn -> error;
   }
+?>

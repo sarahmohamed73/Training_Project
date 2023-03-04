@@ -19,7 +19,9 @@
   ('$username','$encryptionPass','$email','$phone','$gender','$address','$privliges')";
   $query = $conn -> query($insert);
   if($query) {
-    header('location: ../../admins.php');
+    $id = $conn -> insert_id;
+    echo $id;
   } else {
     echo $conn -> error;
   }
+?>

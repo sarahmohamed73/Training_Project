@@ -17,29 +17,42 @@
 <li class="nav-item active">
     <a class="nav-link" href="index.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <span>Dashboard</span>
+    </a>
 </li>
 
 <!-- Nav Item - Admins -->
 <li class="nav-item active">
     <a class="nav-link" href="admins.php">
         <i class="fa fa-users"></i>
-        <span>Admins</span></a>
+        <span>Admins</span>
+    </a>
 </li>
 
 <!-- Nav Item - Products -->
 <li class="nav-item active">
     <a class="nav-link" href="products.php">
         <i class="fas fa-store-alt"></i>
-        <span>Products</span></a>
+        <span>Products</span>
+    </a>
 </li>
 
 <!-- Nav Item - Categories -->
 <li class="nav-item active">
     <a class="nav-link" href="categories.php">
         <i class="fas fa-shapes"></i>
-        <span>Categories</span></a>
+        <span>Categories</span>
+    </a>
 </li>
+
+<!-- Nav Item - Messages -->
+<li class="nav-item active">
+    <a class="nav-link" href="messages.php">
+        <i class="fas fa-comment-alt"></i>
+        <span>Messages</span>
+    </a>
+</li>
+
 <!-- Divider -->
 <hr class="sidebar-divider">
 
