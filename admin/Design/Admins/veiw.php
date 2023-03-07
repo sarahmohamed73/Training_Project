@@ -20,7 +20,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" data-id="" onclick="ConfirmDeleteAdmin(this)" class="confirmDelete btn btn-danger">Confirm</button>
+        <button type="button" data-id="" class="confirmDeleteAdmin btn btn-danger">Confirm</button>
       </div>
     </div>
   </div>
@@ -122,7 +122,7 @@
       <td>
         <a class="btn btn-primary" href="?action=edit&id=<?=$admin["id"]?>">Edit</a>
         <!-- Button trigger modal -->
-        <button type="button" class="delete btn btn-danger" onclick="DeleteAdmin(<?=$admin['username']?>, <?=$admin['id']?>)" data-toggle="modal" data-target="#del" data-id="<?=$admin['id']?>" data-name="<?=$admin['username']?>">
+        <button type="button" class="deleteAdmin btn btn-danger" data-toggle="modal" data-target="#del" data-id="<?=$admin['id']?>" data-name="<?=$admin['username']?>">
           Delete
         </button>
       </td>

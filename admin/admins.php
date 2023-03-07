@@ -51,3 +51,8 @@ include "Includes/sidebar.php";
 <?php
 include "Includes/footer.php";
 ?>
+<!-- Admins -->
+<script src="js/Admins/delete-ajax.js"></script>
+<script src="js/Admins/insert-ajax.js"></script>
+</body>
+</html>

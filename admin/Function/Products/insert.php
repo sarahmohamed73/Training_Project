@@ -1,15 +1,17 @@
 <?php
-  if(!isset($_POST['name'])) {
-    header("location: ../../ErrorPage.php");
-    exit();
-  }
+  // if(!isset($_POST['name'])) {
+  //   header("location: ../../ErrorPage.php");
+  //   exit();
+  // }
   
-  if (empty($_POST["name"]) && empty($_POST["category"])) {
-    header("location: ../../products.php");
-    exit();
-  }
+  // if (empty($_POST["name"]) && empty($_POST["category"])) {
+  //   header("location: ../../products.php");
+  //   exit();
+  // }
 
-  extract($_POST);
+  // extract($_POST);
+  print_r($_FILES);
+  exit();
   $imgName = $_FILES['image']['name'];
   $temp = $_FILES['image']['tmp_name'];
   $imgNumber = count($imgName);
@@ -59,7 +61,9 @@
 
   $query = $conn -> query($insert);
   if($query) {
-    header('location: ../../products.php');
+    $id = $conn -> insert_id;
+    echo $id;
   } else {
     echo $conn -> error;
   }
+?>

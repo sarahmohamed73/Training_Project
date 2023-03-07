@@ -1,7 +1,7 @@
 $(".deleteProduct").click(function(){
   let name = $(this).data("name");
   let id = $(this).data("id");;
-  $(".adminName").text(name);
+  $(".productName").text(name);
   $(".confirmDeleteProduct").data("id",id)
 })
 

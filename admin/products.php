@@ -51,3 +51,8 @@ include "Includes/sidebar.php";
 <?php
 include "Includes/footer.php";
 ?>
+<!-- Products -->
+<script src="js/Products/delete-ajax.js"></script>
+<script src="js/Products/insert-ajax.js"></script>
+</body>
+</html>

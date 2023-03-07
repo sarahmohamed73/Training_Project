@@ -1,7 +1,3 @@
-$.getScript("js/Admins/delete-ajax.js", function () {
-  console.log("The script is loaded but not necessarily executed.");
-});
-
 $(".addUser").click(function(){
   let username = $(".username").val();
   let password = $(".password").val();
@@ -25,7 +21,7 @@ $(".addUser").click(function(){
         <td>${privliges == 0 ? "Admin" : "User"}</td>
         <td>
           <a class="btn btn-primary" href="?action=edit&id=${id}">Edit</a>
-          <button type="button" class="delete btn btn-danger" onclick="Delete(${username}, ${id})" data-toggle="modal" data-target="#del" data-id="${id}" data-name="${username}">
+          <button type="button" class="delete btn btn-danger" data-toggle="modal" data-target="#del" data-id="${id}" data-name="${username}">
           Delete
         </button>
         </td>
