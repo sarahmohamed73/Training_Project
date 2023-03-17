@@ -96,7 +96,7 @@
                         $images = explode(",",$product['image']);
                         $subtotal += $product['quantity'] * $product['price'];
                     ?>
-                    <tr>
+                    <tr  class="row<?=$product['id']?>">
                       <th class="pl-0 border-0" scope="row">
                         <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="detail.php?id=<?=$product['id']?>"><img src="admin/Images/<?=$images[0]?>" alt="..." width="70"/></a>
                           <div class="media-body ml-3"><strong class="h6"><a class="reset-anchor animsition-link" href="detail.php?id=<?=$product['id']?>"><?=$product['name']?></a></strong></div>
@@ -108,7 +108,7 @@
                       <td class="align-middle border-0">
                         <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                           <div class="quantity">
-                            <button class="decrease<?=$product['id']?> dec-btn p-0 text-dark" onclick="decrease(<?=$product['id']?>,<?=$product['price']?>)"><i class="fas fa-caret-left"></i></button>
+                            <button class="decrease decrease<?=$product['id']?> dec-btn p-0 text-dark" onclick="decrease(<?=$product['id']?>,<?=$product['price']?>)"><i class="fas fa-caret-left"></i></button>
                             <input class="product product<?=$product['id']?> form-control form-control-sm border-0 shadow-0 p-0" type="text" value="<?=$product['quantity']?>"/>
                             <button class="inc-btn p-0 text-dark" onclick="increase(<?=$product['id']?>,<?=$product['price']?>)"><i class="fas fa-caret-right"></i></button>
                           </div>
@@ -144,9 +144,10 @@
                     <li class="border-bottom my-2"></li>
                     <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span class="finalTotal">$<?=$totalPrice?></span></li>
                     <li>
-                      <form action="Function/shoppingList/discount.php" method="POST">
+                      <form method="POST" class="coupon">
                         <div class="form-group mb-0">
-                          <input class="form-control" type="text" name="coupon" value="" placeholder="Enter your coupon">
+                          <input class="couponName form-control" type="text" name="coupon" value="" placeholder="Enter your coupon">
+                          <div class="message mt-3"></div>
                           <button class="btn btn-dark btn-sm btn-block" type="submit"> <i class="fas fa-gift mr-2"></i>Apply coupon</button>
                         </div>
                       </form>
@@ -170,3 +171,6 @@
       <?php
         include "Includes/footer.php";
       ?>
+      <script src="js/cart-ajax.js"></script>
+</body>
+</html>

@@ -33,13 +33,8 @@ include "Includes/sidebar.php";
           <div class="row">
               <div class="col-lg-12">
               <?php
-                if(!isset($_GET["action"])) {
-                  include "Design/Admins/veiw.php";
-                } else if($_GET["action"] == "add") {
-                  include "Design/Admins/add.php";
-                } else if($_GET["action"] == "edit") {
-                  include "Design/Admins/edit.php";
-                }
+                include "Design/Admins/modals.php";
+                include "Design/Admins/veiw.php";
               ?>
               </div>
           </div>
@@ -52,7 +47,8 @@ include "Includes/sidebar.php";
 include "Includes/footer.php";
 ?>
 <!-- Admins -->
-<script src="js/Admins/delete-ajax.js"></script>
-<script src="js/Admins/insert-ajax.js"></script>
+  <script src="js/Admins/delete-ajax.js"></script>
+  <script src="js/Admins/insert-ajax.js"></script>
+  <script src="js/Admins/update_ajax.js"></script>
 </body>
 </html>

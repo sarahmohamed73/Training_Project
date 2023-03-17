@@ -1,23 +1,15 @@
-$(".deleteProduct").click(function(){
+let id = 0
+$("tbody").on("click",".delete",function(){
   let name = $(this).data("name");
-  let id = $(this).data("id");;
+  id = $(this).data("id");;
   $(".productName").text(name);
-  $(".confirmDeleteProduct").data("id",id)
 })
 
-let triggerElement = '';
-
-$('#del').on('shown.bs.modal', function (event) {
-  triggerElement = $(event.relatedTarget); 
-});
-
-$(".confirmDeleteProduct").click(function(){
-  let id = $(this).data("id");
-  console.log(id);
+$("body").on("click",".confirmDelete",function(){
   url = "Function/Products/delete.php";
   $.post(url, {id}, function(data) {
     console.log(data)
   })
-  triggerElement.parent().parent().remove();
+  $(`.row${id}`).remove();
   $('#del').modal('hide');
 })

@@ -33,13 +33,7 @@ include "Includes/sidebar.php";
           <div class="row">
               <div class="col-lg-12">
               <?php
-                if(!isset($_GET['action'])) {
-                  include "Design/Products/veiw.php";
-                } elseif($_GET['action'] == 'add') {
-                  include "Design/Products/add.php";
-                } elseif($_GET['action'] == 'edit') {
-                  include "Design/Products/edit.php";
-                }
+                include "Design/Products/veiw.php";
               ?>
               </div>
           </div>

@@ -80,7 +80,6 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.validate.min.js"></script>
   <!-- <script src="js/main.js"></script> -->
-	<script src="js/Messages/insert_ajax.js"></script>
+	<script src="js/sendMessage_ajax.js"></script>
 	</body>
 </html>
-

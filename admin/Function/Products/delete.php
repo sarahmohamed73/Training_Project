@@ -9,7 +9,7 @@
   $delete = "DELETE FROM products WHERE id = $id";
   $query = $conn -> query($delete);
   if($query) {
-    header("location: ../../products.php");
+    echo "Delete Successfully";
   } else {
     echo $conn -> error;
   }

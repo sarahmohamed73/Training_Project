@@ -19,7 +19,19 @@
                 </li>
               </ul>
               <ul class="navbar-nav ml-auto">               
-                <li class="nav-item"><a class="nav-link" href="cart.php"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">(2)</small></a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="cart.php">
+                    <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart
+                    <small class="numPro text-gray">
+                      <?php
+                        include_once "admin/Function/connection.php";
+                        $count = "SELECT COUNT(*) AS counter FROM carts";
+                        $counter = $conn -> query($count) -> fetch_assoc();
+                        echo "(".$counter['counter'].")";
+                      ?>
+                    </small>
+                  </a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
                 <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
               </ul>

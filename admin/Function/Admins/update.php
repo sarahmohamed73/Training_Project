@@ -7,6 +7,7 @@
   include_once "../connection.php";
   extract($_POST);
 
+
   if($password != "") {
     $encryptionPass = md5($password);
     $updataPass = "UPDATE admins SET password = '$encryptionPass' WHERE id = '$id'";
@@ -24,7 +25,8 @@
             WHERE id = $id" ;
   $query = $conn -> query($update);
   if($query) {
-    header("location: ../../admins.php");
+    echo "Update Sucessfully";
   } else {
     echo $conn -> error;
   }
+?>

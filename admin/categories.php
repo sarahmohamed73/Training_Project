@@ -55,3 +55,5 @@ include "Includes/sidebar.php";
 <?php
 include "Includes/footer.php";
 ?>
+</body>
+</html>

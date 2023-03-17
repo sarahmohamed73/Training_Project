@@ -4,7 +4,6 @@
     exit();
   }
   
-
   if(empty($_POST['username']) && empty($_POST['password'])) {
     header('location: ../../admins.php');
     exit();

@@ -20,7 +20,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" data-id="" class="confirmDeleteProduct btn btn-danger">Confirm</button>
+        <button type="button" data-id="" class="confirmDelete btn btn-danger">Confirm</button>
       </div>
     </div>
   </div>
@@ -37,26 +37,26 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="" enctype="multipart/form-data">
+      <form method="POST" action="" enctype="multipart/form-data" class="add">
           <div class="form-group">
-            <label for="exampleFormControlInput1" class="form-label">Name</label>
-            <input type="text" name="name" value="" class="name form-control" id="exampleFormControlInput1">
+            <label for="addname" class="form-label">Name</label>
+            <input type="text" name="name" value="" class="name form-control" id="addname">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1" class="form-label">Price</label>
-            <input type="text" name="price" value="" class="price form-control" id="exampleFormControlInput1">
+            <label for="addprice" class="form-label">Price</label>
+            <input type="text" name="price" value="" class="price form-control" id="addprice">
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1" class="form-label">Sale</label>
-            <input type="text" name="sale" value="" class="sale form-control" id="exampleFormControlInput1">
+            <label for="addsale" class="form-label">Sale</label>
+            <input type="text" name="sale" value="" class="sale form-control" id="addsale">
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Image</label>
-            <input type="file" name="image[]" value="" class="image form-control" id="exampleInputEmail1" multiple>
+            <label for="addemail">Image</label>
+            <input type="file" name="image[]" value="" class="image form-control" id="addemail" multiple>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Categories</label>
-            <select class="category form-control" name="category" id="category exampleFormControlSelect1">
+            <label for="addcategery">Categories</label>
+            <select class="category form-control" name="category" id="category addcategery">
               <?php
                 include_once "Function/connection.php";
                 $select = "SELECT * From categories_from_category";
@@ -68,24 +68,24 @@
             </select>
           </div>
           <div class="form-check">
-            <input class="trending form-check-input" type="radio" name="trending" id="flexRadioDefault1" value="0">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="trending form-check-input" type="radio" name="trending" id="addtrending" value="0">
+            <label class="form-check-label" for="addtrending">
               NOT TERENDING
             </label>
           </div>
           <div class="form-check">
-            <input class="trending form-check-input" type="radio" name="trending" id="flexRadioDefault2" value="1">
-            <label class="form-label" for="flexRadioDefault2">
+            <input class="trending form-check-input" type="radio" name="trending" id="addnottrending" value="1">
+            <label class="form-label" for="addnottrending">
               TERENDING
             </label>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1" class="form-label">Description</label>
-            <textarea type="text" name="description" value="" class="description form-control" id="exampleFormControlInput1"></textarea>
+            <label for="adddescription" class="form-label">Description</label>
+            <textarea type="text" name="description" value="" class="description form-control" id="adddescription"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="addProduct btn btn-primary">Submit</button>
+            <button type="submit" class="addProduct btn btn-primary">Submit</button>
           </div>
         </form>
       </div>
@@ -117,12 +117,12 @@
       $products = $conn -> query($select);
       foreach($products as $product) {
     ?>
-      <tr>
-      <td><?= $product['id'] ?></td>
-      <td style="width:300px"><?= $product['name'] ?></td>
-      <td><?= $product['price']."$" ?></td>
-      <td><?= $product['sale'] ?></td>
-      <td style="width:150px">
+      <tr class="row<?=$product['id']?>">
+      <td class="id<?=$product['id']?>"><?= $product['id'] ?></td>
+      <td class="name<?=$product['id']?>" style="width:300px"><?= $product['name'] ?></td>
+      <td class="price<?=$product['id']?>"><?= $product['price']."$" ?></td>
+      <td class="sale<?=$product['id']?>"><?= $product['sale'] ?></td>
+      <td class="images<?=$product['id']?>" style="width:150px">
         <?php
           $images = explode(",",$product['image']);
           foreach($images as $image) {
@@ -130,12 +130,12 @@
         <img style="width: 100px;" src="Images/<?= $image ?>" alt=""><br>
         <?php } ?>
       </td>
-      <td><?= $product['cat_name'] ?></td>
-      <td><?= $product['trending'] == 0 ? "NOT TRENDING" : "TRENDING" ?></td>
+      <td class="cat_name<?=$product['id']?>"><?= $product['cat_name'] ?></td>
+      <td class="trend<?=$product['id']?>"><?= $product['trending'] == 0 ? "NOT TRENDING" : "TRENDING" ?></td>
       <td>
         <a class="btn btn-primary" href="?action=edit&id=<?=$product["id"]?>">Edit</a>
         <!-- Button trigger modal -->
-        <button type="button" class="deleteProduct btn btn-danger" data-toggle="modal" data-target="#del" data-id="<?=$product['id']?>" data-name="<?=$product['name']?>">
+        <button type="button" class="delete btn btn-danger" data-toggle="modal" data-target="#del" data-id="<?=$product['id']?>" data-name="<?=$product['name']?>">
           Delete
         </button>
       </td>

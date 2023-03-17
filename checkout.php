@@ -213,3 +213,6 @@
       <?php
         include "Includes/footer.php";
       ?>
+      <script src="js/checkout-ajax.js"></script>
+</body>
+</html>

@@ -8,7 +8,9 @@
     $coupon = $query -> fetch_assoc();
     $_SESSION['coupon'] = $coupon['name'];
     $_SESSION['discount'] = $coupon['discount'];
-    header("location: ../../cart.php");
+    $couponName = $coupon['name'];
+    $couponDiscount = $coupon['discount'];
+    echo "$couponName+$couponDiscount";
   } else {
     echo $conn -> error;
   }

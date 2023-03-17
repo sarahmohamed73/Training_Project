@@ -1,25 +1,19 @@
-$("tbody").on("click",".deleteAdmin",function(){
+var delete_id = 0;
+$("tbody").on("click",".delete",function(){
   let name = $(this).data("name");
-  let id = $(this).data("id");
+  delete_id = $(this).data("id");
   console.log(name);
-  console.log(id);
+  console.log(delete_id);
   $(".modal-body .adminName").text(name);
-  $(".confirmDeleteAdmin").data("id",id);
 })
 
-let triggerElement = '';
-
-$('#del').on('shown.bs.modal', function (event) {
-  triggerElement = $(event.relatedTarget); 
-});
-
-$("body").on("click",".confirmDeleteAdmin",function(){
-  let id = $(this).data("id");
-  console.log(id);
-  url = "Function/Admins/delete.php";
-  $.post(url, {id}, function(data) {
+$("body").on("click",".confirmDelete",function(event){
+  event.preventDefault();
+  console.log(delete_id);
+  let deleteurl = "Function/Admins/delete.php";
+  $.post(deleteurl, {id: delete_id}, function(data) {
     console.log(data)
   })
-  triggerElement.parent().parent().remove();
   $('#del').modal('hide');
+  $(`.row${delete_id}`).remove();
 })
